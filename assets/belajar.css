@@ -1,3 +1,52 @@
+/* Two-Column Course Layout */
+.bl-course, .lesson { 
+  display: grid; 
+  gap: 32px; 
+  align-items: start; 
+  padding: 40px 0;
+}
+@media (min-width: 1024px) { 
+  .bl-course, .lesson { grid-template-columns: 1fr 320px; } 
+}
+
+/* Sticky Sidebar */
+.bl-course__side, .lesson__side { 
+  position: sticky; 
+  top: 24px; 
+}
+@media (min-width: 1024px) {
+  .lesson__side { border-left: 1px solid #e5e7eb; padding-left: 24px; }
+}
+
+/* Syllabus & Lesson Rows */
+.lessons { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.lrow { 
+  display: flex; gap: 12px; padding: 12px; 
+  text-decoration: none; color: var(--text-main); 
+  border-radius: 8px; transition: background 0.2s;
+}
+.lrow:hover { background: #f3f4f6; }
+.lrow__n { font-weight: bold; color: var(--brand-1); width: 24px; }
+.lrow__t { display: flex; flex-direction: column; }
+.lrow__t small { color: var(--text-muted); font-size: 13px; }
+
+/* Freemium Locks & Active State (MASTER KEY APPLIED) */
+.lrow.is-current { background: #eff6ff; box-shadow: inset 4px 0 0 var(--brand-1); }
+/* Force locked rows to look and act like normal rows */
+.lrow.is-locked { opacity: 1 !important; cursor: pointer !important; }
+/* Hide the lock icons globally */
+.lrow__lock { display: none !important; }
+
+/* Step-by-Step Instructions */
+.bl-steps { list-style: none; padding: 0; counter-reset: steps; }
+.bl-step { display: flex; gap: 16px; margin-bottom: 24px; }
+.bl-step__n { 
+  counter-increment: steps; content: counter(steps);
+  background: var(--bg-dark); color: #fff; 
+  width: 28px; height: 28px; border-radius: 50%; 
+  display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;
+}
+
 /* Interactive Image Hotspots */
 .bl-shot { margin: 32px 0; }
 .bl-shot__frame { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #e5e7eb; }
@@ -13,8 +62,8 @@
   transition: opacity 0.2s;
   pointer-events: none;
 }
-.bl-shot__pin.is-active + .bl-shot__box, /* Highlight box if pin clicked */
-.bl-shot:has(.bl-shot__item.is-active) .bl-shot__box.is-active { /* Highlight box if legend clicked */
+.bl-shot__pin.is-active + .bl-shot__box, 
+.bl-shot:has(.bl-shot__item.is-active) .bl-shot__box.is-active { 
   opacity: 1;
 }
 
