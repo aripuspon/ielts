@@ -1,1 +1,51 @@
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #0A1119;
+  --text-main: #111827;
+  --text-muted: #4B5563;
+  --brand-1: #02A0C1;
+  --brand-2: #3581E1;
+  --k-lime: #D6FD91;
+}
 
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  margin: 0;
+  color: var(--text-main);
+  background: var(--bg-light);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header & Navigation */
+.site-header { border-bottom: 1px solid #e5e7eb; padding: 16px 0; }
+.site-header .container { display: flex; justify-content: space-between; align-items: center; }
+.site-nav { display: flex; gap: 24px; font-weight: 500; font-size: 14px; }
+.site-nav a { text-decoration: none; color: var(--text-main); }
+
+/* Buttons */
+.pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 20px; border-radius: 99px; font-weight: 600; text-decoration: none;
+}
+.pill--dark { background: var(--text-main); color: #fff; }
+.pill--lime { background: var(--k-lime); color: var(--text-main); }
+
+/* Sections & Grids */
+.k-sec { padding: 80px 0; }
+.k-sec--soft { background: #F9FAFB; }
+.k-title { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+.k-lead { font-size: 18px; color: var(--text-muted); max-width: 600px; }
+
+.bento, .plans, .ideas { display: grid; gap: 24px; }
+@media (min-width: 768px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .ideas { grid-template-columns: repeat(4, 1fr); }
+}
+
+.k-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
