@@ -1,46 +1,53 @@
-/* Two-Column Course Layout */
-.bl-course, .lesson { 
-  display: grid; 
-  gap: 32px; 
-  align-items: start; 
-  padding: 40px 0;
+/* Interactive Image Hotspots */
+.bl-shot { margin: 32px 0; }
+.bl-shot__frame { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #e5e7eb; }
+.bl-shot__frame img { width: 100%; height: auto; display: block; }
+
+/* The invisible highlight boxes over the image */
+.bl-shot__box {
+  position: absolute;
+  border: 2px solid var(--brand-1);
+  background: rgba(2, 160, 193, 0.1);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
 }
-@media (min-width: 1024px) { 
-  .bl-course, .lesson { grid-template-columns: 1fr 320px; } 
+.bl-shot__pin.is-active + .bl-shot__box, /* Highlight box if pin clicked */
+.bl-shot:has(.bl-shot__item.is-active) .bl-shot__box.is-active { /* Highlight box if legend clicked */
+  opacity: 1;
 }
 
-/* Sticky Sidebar */
-.bl-course__side, .lesson__side { 
-  position: sticky; 
-  top: 24px; 
+/* The clickable numbered pins on the image */
+.bl-shot__pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 24px; height: 24px;
+  background: var(--brand-1); color: #fff;
+  border: none; border-radius: 50%;
+  font-weight: bold; font-size: 12px;
+  cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
 }
-@media (min-width: 1024px) {
-  .lesson__side { border-left: 1px solid #e5e7eb; padding-left: 24px; }
+.bl-shot__pin:hover, .bl-shot__pin.is-active {
+  transform: translate(-50%, -50%) scale(1.15);
+  background: var(--brand-2);
 }
 
-/* Syllabus & Lesson Rows */
-.lessons { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.lrow { 
-  display: flex; gap: 12px; padding: 12px; 
-  text-decoration: none; color: var(--text-main); 
-  border-radius: 8px; transition: background 0.2s;
+/* The text legend below the image */
+.bl-shot__legend { list-style: none; padding: 0; margin-top: 16px; }
+.bl-shot__item {
+  width: 100%; text-align: left;
+  background: none; border: 1px solid transparent;
+  padding: 12px; border-radius: 8px;
+  display: flex; gap: 12px; align-items: flex-start;
+  cursor: pointer; transition: background 0.2s;
 }
-.lrow:hover { background: #f3f4f6; }
-.lrow__n { font-weight: bold; color: var(--brand-1); width: 24px; }
-.lrow__t { display: flex; flex-direction: column; }
-.lrow__t small { color: var(--text-muted); font-size: 13px; }
-
-/* Freemium Locks & Active State */
-.lrow.is-current { background: #eff6ff; box-shadow: inset 4px 0 0 var(--brand-1); }
-.lrow.is-locked { opacity: 0.6; cursor: not-allowed; }
-.lrow__lock { margin-left: auto; color: #9ca3af; }
-
-/* Step-by-Step Instructions */
-.bl-steps { list-style: none; padding: 0; counter-reset: steps; }
-.bl-step { display: flex; gap: 16px; margin-bottom: 24px; }
-.bl-step__n { 
-  counter-increment: steps; content: counter(steps);
-  background: var(--bg-dark); color: #fff; 
-  width: 28px; height: 28px; border-radius: 50%; 
-  display: flex; align-items: center; justify-content: center; font-weight: bold;
+.bl-shot__item:hover { background: #f9fafb; }
+.bl-shot__item.is-active { background: #eff6ff; border-color: #bfdbfe; }
+.bl-shot__item .bl-shot__n {
+  background: var(--bg-dark); color: #fff;
+  width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-weight: bold; flex-shrink: 0;
 }
+.bl-shot__item.is-active .bl-shot__n { background: var(--brand-1); }
